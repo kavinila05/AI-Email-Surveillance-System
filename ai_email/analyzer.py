@@ -53,7 +53,7 @@ def process_emails():
 
     final = pd.DataFrame(outputs)
 
-    # ✅ ALWAYS ensure column exists
+    #ALWAYS ensure column exists
     if "priority" not in final.columns:
         final["priority"] = 1
 
