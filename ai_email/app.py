@@ -7,7 +7,7 @@ from config import build_metrics
 
 st.set_page_config(layout="wide")
 
-st.title("🏦 AI Communication Surveillance")
+st.title(" AI Communication Surveillance")
 
 # ---------------- SESSION ----------------
 if "raw" not in st.session_state:
@@ -17,7 +17,7 @@ if "result" not in st.session_state:
     st.session_state["result"] = None
 
 # ---------------- SIDEBAR ----------------
-st.sidebar.header("⚙️ Input Source")
+st.sidebar.header("Input Source")
 
 mode = st.sidebar.radio("Choose", ["Generate Emails", "Upload Emails"])
 
@@ -27,7 +27,7 @@ num = st.sidebar.slider("Number of emails", 5, 50, 15)
 st.header("Step 1 — Generate / Upload Emails")
 
 if mode == "Generate Emails":
-    if st.button("📩 Generate Emails"):
+    if st.button(" Generate Emails"):
 
         with st.spinner("Generating emails..."):
             df = generate_emails(num)
@@ -50,11 +50,11 @@ if mode == "Upload Emails":
 # ---------------- SHOW RAW ----------------
 if st.session_state["raw"] is not None:
 
-    st.subheader("📄 Raw Emails Preview")
+    st.subheader("Raw Emails Preview")
     st.dataframe(st.session_state["raw"], use_container_width=True)
 
     st.download_button(
-        "⬇️ Download Raw Emails",
+        " Download Raw Emails",
         st.session_state["raw"].to_csv(index=False),
         file_name="raw_emails.csv"
     )
@@ -64,7 +64,7 @@ if st.session_state["raw"] is not None:
     # ---------------- STEP 2 ----------------
     st.header("Step 2 — Analyse Emails")
 
-    if st.button("🚀 Analyse Emails"):
+    if st.button(" Analyse Emails"):
 
         progress_bar = st.progress(0)
         status = st.empty()
@@ -86,7 +86,7 @@ if st.session_state["raw"] is not None:
         final_df = pd.DataFrame(results)
         st.session_state["result"] = final_df
 
-        status.text("Analysis complete ✅")
+        status.text("Analysis complete ")
         st.success("All emails analysed")
 
 # ---------------- STEP 3 ----------------
@@ -103,14 +103,14 @@ if st.session_state["result"] is not None:
     col2.metric("Non-Compliant", m["non_comp"])
     col3.metric("Compliant", m["comp"])
 
-    st.subheader("📊 Category Distribution")
+    st.subheader(" Category Distribution")
     st.bar_chart(df["category"].value_counts())
 
-    st.subheader("📊 Risk Distribution")
+    st.subheader(" Risk Distribution")
     st.bar_chart(df["priority"].value_counts())
 
     st.download_button(
-        "⬇️ Download Analysed Data",
+        " Download Analysed Data",
         df.to_csv(index=False),
         file_name="analysed_emails.csv"
     )
